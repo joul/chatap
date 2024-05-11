@@ -47,4 +47,12 @@ class UserController extends Controller
         auth()->login($user);
         return redirect('/')->with('success','Thank you for creating an account');
     }
+
+    //Profile
+    public function profile(User $user){
+        return view('profile-post', [
+            'username' => $user->username,
+            'posts' => $user->posts()->latest()->get(),
+            'postCount' => $user->posts->count()]);
+    }
 }
